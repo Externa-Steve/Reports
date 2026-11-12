@@ -1,51 +1,68 @@
-  titre: "Audit de sécurité réseau — cabinet médical"
-  type: cas-client
-  secteur: santé (cabinet médical)
-  annee: 2026
-  role: auditeur sécurité (mission réelle, client anonymisé)
-  statut: livré
+---
+titre: "Audit de sécurité réseau : cabinet médical"
+type: cas-client
+secteur: santé
+role: auditeur sécurité
+mission: réelle (client anonymisé)
+statut: livré
+---
 
+# Cas client 01 : audit d'un cabinet médical
 
-        
-  Audit de sécurité d'un cabinet médical
-Mission réelle réalisée pour un cabinet médical en 2026.
-Client anonymisé (données de santé — secret médical + RGPD art. 9).
-Preuves et rapport complet disponibles sur demande, en entretien.
+> [!NOTE]
+> Mission réelle, client anonymisé.
+> Données de santé : secret médical + RGPD (art. 9).
 
-  Le contexte :
-Petit cabinet médical (~5 postes de travail, 1 serveur de stockage réseau,1 imprimante réseau, box opérateur grand public). 
-Le poste principal manipule des données de santé de patients via un logiciel métier et une base de données locale. 
+## Contexte
 
-  Enjeu fort : 
-secret médical, RGPD (article 9), continuité de l'activité de soins.
-Le cabinet n'avait jamais fait auditer son informatique. 
+Petit cabinet médical : quelques postes, un stockage réseau, une imprimante réseau, une box opérateur grand public.
+Le poste principal manipule des données de santé via un logiciel métier et une base de données locale.
 
-  Ma mission : 
-Évaluer le niveau de sécurité réel du poste de travail sensible 
-et du réseau local, puis livrer des actions correctives priorisées, compréhensibles par un non-informaticien.
+**Enjeux :** secret médical, RGPD (art. 9), continuité des soins.
+Le cabinet n'avait jamais fait auditer son informatique.
 
-  Ma démarche (ce que j'ai fait, étape par étape)
-1. Reconnaissance OSINT, recherche de l'exposition publique du cabinet et de son personnel (données qui traînent en ligne, surface d'attaque externe).
-2. Cartographie réseau découverte des hôtes puis scan de ports (outils en mode prudent pour ne pas perturber l'activité), identification des services exposés sur le réseau local.
-3. Audit du poste sensible sur site, inspection de la configuration Windows (pare-feu, antivirus, comptes, mises à jour, accès distants) en ligne de commande.
-4. Rédaction du rapport classement des constats par criticité (critique / important / moyen) avec, pour chacun, le risque métier expliqué simplement.
-5. Plan de remédiation actions à faire sous 24-48h, cette semaine, ce mois. 
+## Ma mission
 
-  Résultats clés (anonymisés) 
-  Constats remontés, hiérarchisés par risque réel pour le cabinet 
-Critique: pare-feu du poste désactivé, mot de passe Wi-Fi récupérable en clair, base de données de santé hébergée sur un moteur ancien non maintenu (plus de correctifs.
-Critique: sauvegardes présentes mais jamais testées en restauration : fausse sécurité, aucune garantie de récupérer les données en cas d'incident.
-Critique: conformité données de santé hébergées via une solution non  conforme aux exigences d'hébergement de données de santé (HDS) non-conformité réglementaire directe.
-Important: accès distant (RDP) exposé sur le réseau sans durcissement vérifié, partages de fichiers (SMB) exposés sur plusieurs machines => risque de propagation d'une attaque de poste à poste, imprimante et serveur de stockage accessibles sans protection suffisante.
-Moyen: journalisation du pare-feu désactivée (aucune trace en cas d'incident), comptes à droits trop larges à vérifier, bloatware à nettoyer, hygiène physique (informations sensibles visibles sur les écrans, en post-it, pas de verification pour les clés usb client).
-Moyen: poste en salle d'attente vulnerable et accessible physiquement.
+Évaluer le niveau de sécurité **réel** du poste sensible et du réseau local, puis livrer des actions correctives priorisées, compréhensibles par un non-informaticien.
 
-J'ai aussi noté les bons points existants (compte administrateur intégré désactivé, antivirus professionnel présent, clé Wi-Fi robuste) 
-un audit honnête ne fait pas que faire peur, il reconnaît ce qui va.
+## Démarche
 
-  Livrables produits
-Rapport d'audit complet
-Plan de remédiation priorisé et chiffré
-Devis de remédiation séparé
+1. **Reconnaissance OSINT** : exposition publique du cabinet et de son personnel (surface d'attaque externe).
+2. **Cartographie réseau** : découverte des hôtes, scan de ports en mode prudent (sans perturber l'activité), identification des services exposés.
+3. **Audit du poste sensible, sur site** : configuration Windows en ligne de commande (pare-feu, antivirus, comptes, mises à jour, accès distants).
+4. **Rapport** : constats classés par criticité, chacun avec son risque métier expliqué simplement.
+5. **Plan de remédiation** : actions sous 24-48 h, cette semaine, ce mois.
 
+## Constats
 
+| Niveau | Constat | Risque métier |
+|---|---|---|
+| Critique | Pare-feu du poste désactivé | Aucune barrière réseau sur le poste qui porte les données de santé |
+| Critique | Mot de passe Wi-Fi récupérable en clair | Accès au réseau local pour quiconque met la main sur le poste |
+| Critique | Base de données de santé sur un moteur ancien, non maintenu | Plus de correctifs de sécurité |
+| Critique | Sauvegardes présentes mais **jamais testées en restauration** | Fausse sécurité : aucune garantie de récupérer les données |
+| Critique | Hébergement des données de santé via une solution non conforme HDS | Non-conformité réglementaire directe |
+| Important | Accès distant (RDP) exposé sur le réseau, durcissement non vérifié | Porte d'entrée pour un attaquant |
+| Important | Partages SMB exposés sur plusieurs machines | Propagation d'un poste à l'autre |
+| Important | Imprimante et stockage réseau insuffisamment protégés | Accès non maîtrisé aux documents |
+| Moyen | Journalisation du pare-feu désactivée | Aucune trace en cas d'incident |
+| Moyen | Comptes à droits trop larges (à vérifier), bloatware | Surface d'attaque inutile |
+| Moyen | Hygiène physique : infos sensibles visibles, post-it, clés USB non contrôlées | Fuite par simple observation |
+| Moyen | Poste en salle d'attente, accessible physiquement | Accès direct pour un visiteur |
+
+## Bons points
+
+Un audit honnête ne fait pas que faire peur, il reconnaît ce qui va :
+
+- Compte administrateur intégré désactivé
+- Antivirus professionnel présent
+- Clé Wi-Fi robuste
+
+## Livrables
+
+- Rapport d'audit complet
+- Plan de remédiation priorisé et chiffré
+- Devis de remédiation séparé
+
+> [!IMPORTANT]
+> Rapport complet et preuves : communicables en entretien, uniquement avec l'accord du client.
