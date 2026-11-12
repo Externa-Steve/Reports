@@ -6,10 +6,7 @@
   statut: livré
 
 
-
-                    # Cas client 01
-
-
+        
   Audit de sécurité d'un cabinet médical
 Mission réelle réalisée pour un cabinet médical en 2026.
 Client anonymisé (données de santé — secret médical + RGPD art. 9).
